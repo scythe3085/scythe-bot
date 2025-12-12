@@ -1,0 +1,132 @@
+Scythe Bot – Privacy Policy
+
+Last Updated: December 2025
+
+1. Introduction
+
+This Privacy Policy explains what information Scythe Bot (“the Bot”) collects, how it is used, and how it is stored.
+By using the Bot, you agree to this policy. If you do not agree, remove the Bot from your server.
+
+2. Information the Bot Collects
+
+The Bot only collects information required for core features to operate.
+This includes:
+
+a) Discord User Information
+
+User IDs
+
+Usernames and discriminators (e.g., User#1234)
+
+Roles (for ticket staff permissions or verification)
+
+b) Guild (Server) Information
+
+Guild IDs
+
+Channel IDs (ticket logs, verification logs, VC settings)
+
+Role IDs (verified role, staff roles)
+
+c) Feature-Specific Data
+
+Ticket System:
+Temporary storage of ticket form responses, message content, and transcripts.
+
+Temporary Voice Channels:
+VC ownership, co-owner lists, VC bans, and rename/lock settings.
+
+Verification System:
+Account age check results and verification logs.
+
+3. Information the Bot Does NOT Collect
+
+Scythe Bot does NOT collect or store:
+
+Email addresses
+
+Passwords
+
+IP addresses
+
+Payment information
+
+Private messages (DMs)
+
+Any content outside of configured bot channels
+
+The Bot only operates within Discord and only sees data Discord provides to all bots.
+
+4. How the Information Is Used
+
+The Bot uses collected information only to:
+
+Create and manage temporary voice channels
+
+Provide ticket support and generate transcripts
+
+Verify members and assign roles
+
+Log relevant actions to configured channels
+
+Maintain persistent user blocklists for VC control
+
+The Bot does not sell, share, or transfer data to third parties.
+
+5. Data Storage Duration
+Temporary Voice Data
+
+VC ownership, bans, and co-owner data are stored only while the VC exists.
+
+When the VC is deleted, this data is also removed.
+
+Ticket Data
+
+Transcript text is stored only in your configured transcript channel until you delete it.
+
+The Bot does not store transcripts anywhere else.
+
+Verification Logs
+
+Stored only in the Discord verification log channel you configured.
+
+Configuration Data
+
+Server settings (roles, channels, VC settings) are kept until changed or reset with /config.
+
+6. Data Removal
+
+Users may request removal of their personal data from:
+
+VC blocklists
+
+Ticket logs (by contacting a server admin)
+
+Verification logs (via server admins only)
+
+Removing the Bot from a server immediately stops all data collection.
+
+7. Security
+
+No data leaves Discord’s platform or your server.
+
+The Bot stores configuration files locally on the owner’s secure VPS.
+
+Only the Bot owner has access to server-level files.
+
+No user or staff member can access raw data storage.
+
+8. Children’s Privacy
+
+Scythe Bot does not knowingly store or target personal data from children under 13.
+(Discord itself requires users to be 13+.)
+
+9. Third-Party Access
+
+The Bot does not share data with any external service.
+All data remains inside Discord unless server staff choose to export logs.
+
+10. Contact
+
+For privacy-related questions or requests, contact the Bot owner via Discord:
+183628405592293386
