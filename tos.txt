@@ -1,0 +1,83 @@
+Scythe Bot – Terms of Service
+
+Last Updated: December 2025
+
+1. Acceptance of Terms
+
+By adding or using Scythe Bot (“the Bot”) in your Discord server, you agree to these Terms of Service.
+If you do not agree, you must remove the Bot immediately.
+
+2. Bot Purpose
+
+Scythe Bot provides features including, but not limited to:
+
+Support ticket system
+
+User verification system
+
+Temporary voice channel creation and management
+
+Moderation tools
+
+3. Data Collected
+
+The Bot may temporarily store the following data:
+
+Discord User IDs (for verification, ticket authors, VC ownership, blocklists)
+
+Guild IDs and role IDs (for configuration)
+
+Message content inside tickets (for transcripts)
+
+The Bot does NOT collect:
+
+Email addresses
+
+Passwords
+
+Payment information
+
+Private messages (DMs)
+
+4. Data Storage Duration
+
+Ticket transcripts are stored in the server’s configured transcript channel until manually deleted.
+
+VC ownership and blocklists persist until changed by the user.
+
+No data is shared with third parties.
+
+5. User Responsibilities
+
+Users agree NOT to:
+
+Abuse automated verification systems
+
+Exploit or attempt to break VC ownership features
+
+Use the Bot for illegal or malicious purposes
+
+6. Bot Availability
+
+The Bot is provided “as is” with no uptime guarantees.
+Features may change or be removed at any time.
+
+7. Limitation of Liability
+
+The Bot developers are not responsible for:
+
+Lost data
+
+Moderation mistakes
+
+Server configuration issues
+
+8. Removal of the Bot
+
+To stop using the Bot, simply remove it from your server.
+All future data collection stops immediately.
+
+9. Contact
+
+For support or questions, contact the Bot owner via Discord:
+183628405592293386
