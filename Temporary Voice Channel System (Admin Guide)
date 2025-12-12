@@ -1,0 +1,414 @@
+Scythe Bot – Temporary Voice Channel System (Admin Guide)
+1. What the VC system does
+
+Scythe Bot provides a join-to-create temporary voice system:
+
+Users join a special Join-to-Create voice channel.
+
+The bot creates a personal temp VC for that user.
+
+The user is moved into their new VC automatically.
+
+A control panel is posted in that VC’s text chat, letting them manage it.
+
+When the VC is empty, it automatically deletes itself.
+
+All behaviour is per-server and controlled by your /config settings.
+
+2. Initial setup (admins)
+
+To use temporary VCs, you must configure:
+
+A Join-to-Create voice channel
+
+A VC Category where temp VCs are created
+
+Usually this is done via:
+
+/config quick-setup
+or
+
+/config set-vc-category and /config set-join-vc (depending on your config system)
+
+After setup:
+
+When a user joins the Join-to-Create VC, the bot:
+
+Creates a new VC inside the VC Category.
+
+Names it something like: 🔊 username's VC
+
+Gives the user owner-style permissions in that channel.
+
+Moves them into the new VC.
+
+Posts the VC control panel in the VC’s text chat (Text Chat in Voice).
+
+3. How temp VCs are created and permissions set
+
+When the bot creates a temporary VC, it does something like:
+
+Base permissions:
+
+@everyone: can View and Connect (unless later locked).
+
+For the owner (the user who triggered creation):
+
+ViewChannel
+
+Connect
+
+ManageChannels
+
+MuteMembers
+
+DeafenMembers
+
+MoveMembers
+
+This gives the owner enough power to fully manage their temp VC.
+
+If the owner has a VC blocklist (using /voice block), the bot:
+
+Adds those blocked users to the VC’s local ban list,
+
+Sets their perms to Connect: false, ViewChannel: true,
+
+Kicks them out of that VC if they’re inside.
+
+4. The VC control panel (widget)
+
+Inside each temp VC’s text chat, the bot sends a control panel message with:
+
+Buttons
+
+✏️ Rename VC
+
+Opens a modal to rename the voice channel.
+
+Only the owner / co-owners / admins can use it.
+
+🔒 Lock Join
+
+Blocks @everyone from connecting.
+
+Ensures the owner and all co-owners still have:
+
+ViewChannel: true
+
+Connect: true
+
+Result: only owner + co-owners (and admins, via higher perms) can join.
+
+🔓 Unlock Join
+
+Re-allows @everyone to Connect.
+
+Clears any explicit Connect overrides for owner + co-owners so they fall back to normal inherited perms.
+
+Result: server members can join again, following server-level rules.
+
+👥 Set Limit
+
+Opens a modal to set a user limit on the VC (0–99).
+
+0 means no limit.
+
+🗑 Delete VC
+
+Deletes the temp VC immediately.
+
+Also clears the internal tracking so the owner can create a new one without cooldown issues.
+
+🔄 Refresh
+
+Regenerates the panel message.
+
+Updates the member list, co-owners, bans, etc.
+
+Select menus
+
+Member Ban menu
+Custom ID: vc_member_ban:<vcId>
+
+Shows current members in the VC.
+
+Selecting a user:
+
+Adds them to the VC-only ban list.
+
+Sets their perms: Connect: false, ViewChannel: true.
+
+Disconnects them from the VC if they are inside.
+
+This only affects that one VC, not the whole server, and not future temp VCs.
+
+Member Unban menu
+Custom ID: vc_member_unban:<vcId>
+
+Shows users currently banned from that VC.
+
+Selecting a user:
+
+Removes them from the VC’s local ban list.
+
+Clears their explicit Connect / ViewChannel overrides (they go back to normal inherited perms).
+
+Co-owner manage menu
+Custom ID: vc_coowner_manage:<vcId>
+
+The menu has two types of entries:
+
++ Add: Username → value like add:<userId>
+
+Adds that user as a co-owner of the VC.
+
+- Remove: Username → value like remove:<userId>
+
+Removes that user from the co-owner list.
+
+Co-owners:
+
+Are stored in meta.coOwners.
+
+Can fully use the panel just like the owner.
+
+When the VC is locked, the bot ensures co-owners still have Connect + ViewChannel permissions so they’re not accidentally locked out.
+
+5. Slash commands: /voice
+
+The /voice command gives owners persistent controls beyond a single VC session.
+
+/voice block <user>
+
+Adds the target user to the owner’s VC blocklist for that guild.
+
+Effects:
+
+The user is added to the persistent blocklist in storage (via vcPrefs).
+
+If the owner currently has a temp VC:
+
+They’re also added to that VC’s banned set.
+
+Their perms set to Connect: false, ViewChannel: true.
+
+If they’re inside that VC, they are disconnected.
+
+Result:
+That user will be blocked from every future temp VC owned by that person (in that server).
+
+/voice unblock <user>
+
+Removes the user from the owner’s VC blocklist in storage.
+
+If the owner currently has a temp VC:
+
+Removes them from that VC’s banned set (if present).
+
+Clears their explicit Connect / ViewChannel overrides.
+
+Result:
+That user can join the owner’s current and future temp VCs again (subject to normal server perms).
+
+/voice invite <user>
+
+Must be used inside a managed temp VC that the caller owns / co-owns.
+
+Gives the target user explicit:
+
+Connect: true
+
+ViewChannel: true
+
+This allows the target to join even if the VC is locked.
+
+Useful when:
+
+The VC is locked to everyone.
+
+You want to manually invite someone in.
+
+/voice claim
+
+Must be used inside a temp VC.
+
+If the VC is managed by the temp system:
+
+If the original owner is still in the VC:
+
+The claim is rejected.
+
+If the owner has left the channel:
+
+The user running /voice claim becomes the new owner:
+
+meta.ownerId is updated.
+
+Permission overwrites are updated to give them:
+
+ManageChannels, MoveMembers, etc.
+
+The change is logged.
+
+This is useful when the owner disconnects or leaves and someone else needs control of that VC.
+
+6. VC-only bans vs global blocklist
+
+There are two layers of blocking:
+
+VC-only bans (panel menus)
+
+Set via the ban/unban select menus in the VC control panel.
+
+Affect only that one VC.
+
+Do not persist once the VC is deleted.
+
+Do not affect future temp VCs automatically.
+
+Persistent blocklist (/voice block / /voice unblock)
+
+Managed via slash commands.
+
+Stored in vcPrefs for that guild and owner.
+
+When the owner creates any new temp VC, the bot automatically:
+
+Applies that list as banned users in the new VC.
+
+Sets Connect: false, ViewChannel: true on them.
+
+TL;DR for users:
+
+Panel ban = just this VC
+
+/voice block = this VC + all future VCs you own on this server
+
+7. Auto-deletion when empty
+
+During normal runtime:
+
+Whenever a user leaves a VC:
+
+The bot checks if that VC is one of its temp VCs.
+
+If yes, it waits a short delay (e.g. 2 seconds).
+
+If the VC is now empty:
+
+It deletes the VC.
+
+It removes the VC’s entry from tempVoiceChannels.
+
+It clears the owner’s cooldown so they can immediately create another VC.
+
+This ensures temp channels clean up automatically and don’t clutter the server.
+
+8. How the bot decides what to delete on restart
+
+When the bot restarts, it runs a restore pass over the VC category:
+
+It reads the configured VC category ID from your guild config.
+
+It looks at all voice channels inside that category.
+
+For each channel, it tries to decide whether it was one of the bot’s temp VCs.
+
+It uses a heuristic:
+
+It scans the channel’s permission overwrites.
+
+If it finds a member (not a role) with ManageChannels allowed, it assumes:
+
+“This is probably a temp VC owned by that user.”
+
+Then:
+
+If there is no one in the channel at startup:
+
+It treats it as a leftover temp VC and auto-deletes it.
+
+If there are people in it:
+
+It restores tracking for that VC and continues as normal.
+
+This means it does not look at name patterns or creation timestamps – it purely relies on:
+
+Being in the VC category, and
+
+Having a member overwrite with ManageChannels.
+
+9. Important admin note: extra VCs in the temp category
+
+You can put extra manual voice channels in the same VC category if you really want, but you must understand how the restart logic works.
+
+If you create a manual / permanent VC inside the temp VC category, and you:
+
+Give a specific user a channel overwrite with ManageChannels, and
+
+The channel is empty at the moment the bot restarts,
+
+then the bot may:
+
+Assume it’s a temp VC,
+
+And auto-delete it on startup.
+
+Safe way to add extra VCs to the temp category
+
+If you must put extra channels in the same category:
+
+Do not give user-specific overwrites with ManageChannels.
+
+Instead, give roles the permissions you need.
+
+Specifically:
+
+It’s safe to:
+
+Add role overwrites (e.g. @AdminRole with ManageChannels).
+
+Use default category-level role perms.
+
+It’s risky to:
+
+Add overwrites like:
+
+“User X: allow ManageChannels”
+in a VC inside the temp category.
+
+The heuristic only checks member-level overwrites with ManageChannels, not roles.
+So as long as you avoid user-specific ManageChannels overwrites, your manual channels will not be mistaken for temp VCs.
+
+10. Summary for server owners
+
+Use Join-to-Create + VC Category for temp VCs.
+
+Users get a personal VC with a control panel.
+
+VC panel:
+
+Rename, lock/unlock, limit, delete, refresh.
+
+VC-only ban/unban.
+
+Add/remove co-owners.
+
+/voice commands:
+
+/voice block / /voice unblock → persistent owner blocklist.
+
+/voice invite → let someone into a locked VC.
+
+/voice claim → take over an abandoned VC.
+
+Temp VCs auto-delete when empty.
+
+On restart, the bot scans the VC category:
+
+Any empty VC with a member-level ManageChannels overwrite is treated as a temp VC and may be deleted.
+
+If you add extra VCs to that category:
+
+Use role perms, not user-specific ManageChannels overwrites, to avoid accidental deletion.
