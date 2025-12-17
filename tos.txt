@@ -17,17 +17,23 @@ User verification system
 
 Temporary voice channel creation and management
 
-Moderation tools
+Moderation and server management tools
+
+YouTube and Twitch alert notifications
 
 3. Data Collected
 
-The Bot may temporarily store the following data:
+The Bot may temporarily store the following data to provide its features:
 
-Discord User IDs (for verification, ticket authors, VC ownership, blocklists)
+Discord User IDs (for verification, ticket authors, VC ownership, blocklists, and alert configuration)
 
-Guild IDs and role IDs (for configuration)
+Guild IDs, channel IDs, and role IDs (for configuration and logging)
 
-Message content inside tickets (for transcripts)
+Message content inside tickets (for transcripts posted to configured channels)
+
+YouTube channel IDs and Twitch user IDs (for alert subscriptions)
+
+Video or stream IDs to prevent duplicate alerts
 
 The Bot does NOT collect:
 
@@ -37,47 +43,59 @@ Passwords
 
 Payment information
 
+IP addresses
+
 Private messages (DMs)
+
+YouTube or Twitch account credentials
 
 4. Data Storage Duration
 
-Ticket transcripts are stored in the server’s configured transcript channel until manually deleted.
+Ticket transcripts are stored only in the server’s configured transcript channel until manually deleted by server staff.
 
-VC ownership and blocklists persist until changed by the user.
+Temporary voice channel ownership, bans, and settings persist only while relevant or until changed.
 
-No data is shared with third parties.
+Alert configuration data remains stored until removed by server administrators.
+
+No data is shared or sold to third parties.
 
 5. User Responsibilities
 
-Users agree NOT to:
+By using the Bot, users agree NOT to:
 
-Abuse automated verification systems
+Abuse automated verification or ticket systems
 
-Exploit or attempt to break VC ownership features
+Exploit or attempt to bypass voice channel ownership controls
 
-Use the Bot for illegal or malicious purposes
+Spam or misuse alert features
+
+Use the Bot for illegal, abusive, or malicious purposes
+
+Server administrators are responsible for how the Bot is configured in their server.
 
 6. Bot Availability
 
-The Bot is provided “as is” with no uptime guarantees.
-Features may change or be removed at any time.
+The Bot is provided “as is” with no guarantee of uptime or availability.
+Features may be updated, changed, or removed at any time without notice.
 
 7. Limitation of Liability
 
-The Bot developers are not responsible for:
+The Bot developer(s) are not responsible for:
 
-Lost data
+Lost or deleted data
 
-Moderation mistakes
+Missed alerts or delayed notifications
 
-Server configuration issues
+Moderation or configuration mistakes
+
+Discord, YouTube, or Twitch API outages or limitations
 
 8. Removal of the Bot
 
 To stop using the Bot, simply remove it from your server.
-All future data collection stops immediately.
+All future data collection and processing stops immediately.
 
 9. Contact
 
-For support or questions, contact the Bot owner via Discord:
-183628405592293386
+For support, questions, or concerns regarding these Terms, contact the Bot owner on Discord:
+User ID: 183628405592293386
