@@ -9,39 +9,61 @@ By using the Bot, you agree to this policy. If you do not agree, remove the Bot 
 
 2. Information the Bot Collects
 
-The Bot only collects information required for core features to operate.
+The Bot only collects information required for its features to operate correctly.
+
 This includes:
 
 a) Discord User Information
 
 User IDs
 
-Usernames and discriminators (e.g., User#1234)
+Usernames (as provided by Discord)
 
-Roles (for ticket staff permissions or verification)
+Role IDs (for permissions, verification, or alerts)
 
 b) Guild (Server) Information
 
 Guild IDs
 
-Channel IDs (ticket logs, verification logs, VC settings)
+Channel IDs (tickets, logs, alerts, verification, VC management)
 
-Role IDs (verified role, staff roles)
+Role IDs (staff roles, verified roles, alert ping roles)
 
 c) Feature-Specific Data
 
-Ticket System:
-Temporary storage of ticket form responses, message content, and transcripts.
+Ticket System
 
-Temporary Voice Channels:
-VC ownership, co-owner lists, VC bans, and rename/lock settings.
+Temporary ticket messages and user responses
 
-Verification System:
-Account age check results and verification logs.
+Optional transcripts posted to configured channels
+
+Temporary Voice Channels
+
+VC ownership data
+
+Co-owner lists
+
+VC bans and control settings
+
+Verification System
+
+Account age check results
+
+Verification logs (posted only to configured channels)
+
+YouTube & Twitch Alerts
+
+YouTube channel IDs
+
+Twitch channel/user IDs
+
+Alert configuration (selected types, post channels, role mentions, templates)
+
+Processed video or stream IDs to prevent duplicate alerts
 
 3. Information the Bot Does NOT Collect
 
-Scythe Bot does NOT collect or store:
+Scythe Bot does not collect or store:
 
 Email addresses
 
@@ -53,80 +75,92 @@ Payment information
 
 Private messages (DMs)
 
-Any content outside of configured bot channels
+Message content outside configured bot channels
 
-The Bot only operates within Discord and only sees data Discord provides to all bots.
+YouTube or Twitch account credentials
+
+The Bot only accesses data that Discord, YouTube, and Twitch APIs provide to all bots and applications.
 
 4. How the Information Is Used
 
-The Bot uses collected information only to:
+Collected information is used only to:
 
-Create and manage temporary voice channels
+Manage temporary voice channels
 
 Provide ticket support and generate transcripts
 
 Verify members and assign roles
 
-Log relevant actions to configured channels
+Deliver YouTube and Twitch alerts to configured channels
 
-Maintain persistent user blocklists for VC control
+Prevent duplicate alerts for the same video or stream
+
+Log moderation or system actions
 
 The Bot does not sell, share, or transfer data to third parties.
 
 5. Data Storage Duration
-Temporary Voice Data
+Temporary Voice Channel Data
 
-VC ownership, bans, and co-owner data are stored only while the VC exists.
+Stored only while the VC exists
 
-When the VC is deleted, this data is also removed.
+Removed automatically when the VC is deleted
 
 Ticket Data
 
-Transcript text is stored only in your configured transcript channel until you delete it.
+Transcripts exist only in your server’s configured transcript channel
 
-The Bot does not store transcripts anywhere else.
+The Bot does not store transcripts elsewhere
 
 Verification Logs
 
-Stored only in the Discord verification log channel you configured.
+Stored only in your configured verification log channel
 
-Configuration Data
+Alert Configuration Data
 
-Server settings (roles, channels, VC settings) are kept until changed or reset with /config.
+Alert settings (channels, roles, templates) are stored until removed by server administrators
 
 6. Data Removal
 
-Users may request removal of their personal data from:
+Users may request removal of personal data from:
 
 VC blocklists
 
-Ticket logs (by contacting a server admin)
+Ticket transcripts (via server admins)
 
-Verification logs (via server admins only)
+Verification logs (via server admins)
 
-Removing the Bot from a server immediately stops all data collection.
+Removing the Bot from a server immediately stops all data collection and processing.
 
 7. Security
 
-No data leaves Discord’s platform or your server.
+No data is sold or transferred externally
 
-The Bot stores configuration files locally on the owner’s secure VPS.
+Configuration data is stored locally on the Bot owner’s secure VPS
 
-Only the Bot owner has access to server-level files.
+Only the Bot owner has server-level file access
 
-No user or staff member can access raw data storage.
+Server admins cannot access raw storage or databases
 
 8. Children’s Privacy
 
-Scythe Bot does not knowingly store or target personal data from children under 13.
-(Discord itself requires users to be 13+.)
+Scythe Bot does not knowingly collect data from users under the age of 13.
+(Discord itself requires users to be 13 or older.)
 
-9. Third-Party Access
+9. Third-Party Services
 
-The Bot does not share data with any external service.
-All data remains inside Discord unless server staff choose to export logs.
+The Bot communicates with:
+
+Discord’s API
+
+YouTube’s public Data API
+
+Twitch’s public API
+
+These services are used only to fetch public content (videos or live status).
+No personal user data is shared with these services.
 
 10. Contact
 
-For privacy-related questions or requests, contact the Bot owner via Discord:
-183628405592293386
+For privacy-related questions or requests, contact the Bot owner on Discord:
+User ID: 183628405592293386
